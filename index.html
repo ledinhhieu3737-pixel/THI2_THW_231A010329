@@ -4,6 +4,31 @@
 <meta charset="UTF-8">
 <title>Trang Chủ</title>
 <style>
+    #quiz-preview {
+    text-align: center;
+    margin: 40px auto;
+}
+
+.quiz-home-img {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 18px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    animation: fadeIn 0.6s ease;
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.note {
+    margin-top: 12px;
+    font-size: 14px;
+    color: #ddd;
+}
+
     body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -72,6 +97,13 @@
    <li><a href="bai3.html">Bài tập 3</a></li>
   </ul>
 
+ <section id="quiz-preview" class="home-section">
+    <h2>Kết quả Quiz gần nhất</h2>
+
+    <img src="tracnghiem.png" alt="Kết quả trắc nghiệm" class="quiz-home-img">
+
+    <p class="note">Hình ảnh thống kê hiệu suất được hiển thị tự động.</p>
+</section>
 
 <section id="about">
     <img src="avatar.jpg" alt="Avatar cá nhân">
