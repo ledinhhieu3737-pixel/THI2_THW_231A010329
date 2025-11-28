@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Trang Chủ</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #fafafa;
+    }
+    header {
+        background: #333;
+        padding: 15px;
+        color: white;
+        text-align: center;
+    }
+    nav {
+        background: #444;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    section {
+        padding: 30px;
+    }
+    #about {
+        background-size: cover;
+        background-position: center;
+        border-radius: 10px;
+        padding: 20px;
+        transition: 0.3s;
+        filter: brightness(0.95);
+    }
+    #about img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        display: block;
+        margin-bottom: 15px;
+        filter: drop-shadow(0 0 5px black);
+    }
+    ul li {
+        cursor: pointer;
+        padding: 5px 0;
+    }
+    footer {
+        text-align: center;
+        padding: 15px;
+        background: #333;
+        color: white;
+        margin-top: 30px;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Trang Chủ Hệ Thống</h1>
+</header>
+
+<h1>Chọn bài tập</h1>
+  <ul>
+    <li><a href="bai1.html">Bài tập 1</a></li>
+    <li><a href="bai2.html">Bài tập 2</a></li>
+   <li><a href="bai3.html">Bài tập 3</a></li>
+  </ul>
+
+
+<section id="about">
+    <img src="avatar.jpg" alt="Avatar cá nhân">
+
+    <h2>About Me</h2>
+    <p><strong>Họ tên:</strong> Lê Đình Hiếu</p>
+    <p><strong>Ngày sinh:</strong> 22/06/2005</p>
+
+    <h3>Sở thích</h3>
+    <ul id="hobbyList">
+        <li data-key="1">Lập trình</li>
+        <li data-key="2">Đọc sách</li>
+        <li data-key="3">Xem phim</li>
+    </ul>
+
+    <h3>Video yêu thích</h3>
+    <iframe width="420" height="240"
+        src="https://www.youtube.com/watch?v=Ah_uuTwGOYU"
+        frameborder="0" allowfullscreen>
+    </iframe>
+</section>
+
+
+<section id="contact">
+    <h2>Liên hệ</h2>
+
+    <form id="contactForm">
+        <p><input type="text" id="name" placeholder="Họ tên"></p>
+        <p><input type="email" id="email" placeholder="Email"></p>
+        <p><textarea id="message" placeholder="Nội dung..." rows="5"></textarea></p>
+        <button type="submit">Gửi</button>
+    </form>
+</section>
+
+<footer>
+    © <span id="year"></span> - <a href="hosting_guide.txt" style="color: #9cf;">hosting_guide.txt</a>
+</footer>
+
+<script>
+
+
+document.querySelectorAll("#hobbyList li").forEach(li => {
+    li.addEventListener("click", () => {
+        const desc = prompt("Mô tả sở thích này?");
+        if (desc) {
+            alert("Bạn chọn: " + li.innerText + "\nMô tả: " + desc);
+
+           
+            document.getElementById("about").style.background = 
+                "#" + Math.floor(Math.random() * 16777215).toString(16);
+        }
+    });
+});
+
+
+
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let msg = document.getElementById("message").value.trim();
+
+    if (!email.includes("@") || !email.includes(".")) {
+        alert("Email không hợp lệ!");
+        return;
+    }
+    if (msg === "") {
+        alert("Message không được để trống!");
+        return;
+    }
+
+    let data = { name, email, msg, time: new Date().toLocaleString() };
+
+    localStorage.setItem("contact_data", JSON.stringify(data));
+    alert("Đã gửi thành công!");
+});
+
+
+
+document.getElementById("year").innerText = new Date().getFullYear();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Chat Box</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+    }
+    .chat-container {
+        width: 350px;
+        background: #fff;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .messages {
+        height: 350px;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 10px;
+        background: #fafafa;
+    }
+    .msg {
+        max-width: 80%;
+        padding: 8px 12px;
+        border-radius: 12px;
+        margin-bottom: 10px;
+        word-wrap: break-word;
+    }
+    .me {
+        background: #d1eaff;
+        margin-left: auto;
+    }
+    .bot {
+        background: #e6e6e6;
+        margin-right: auto;
+    }
+    .timestamp {
+        font-size: 10px;
+        opacity: 0.6;
+        margin-top: 3px;
+    }
+    .input-row {
+        display: flex;
+        gap: 10px;
+    }
+    input {
+        flex: 1;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
+    button {
+        padding: 10px 18px;
+        border: none;
+        background: #007bff;
+        color: #fff;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="messages" id="messages"></div>
+
+    <div class="input-row">
+        <input type="text" id="input" placeholder="Nhập tin nhắn...">
+        <button onclick="sendMessage()">Gửi</button>
+    </div>
+</div>
+
+<script>
+    const messagesDiv = document.getElementById("messages");
+    const input = document.getElementById("input");
+
+  
+    function escapeHTML(str) {
+        return str.replace(/[&<>"']/g, tag => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        }[tag]));
+    }
+
+   
+    let messages = JSON.parse(localStorage.getItem("chat_history")) || [];
+
+    function renderMessages() {
+        messagesDiv.innerHTML = "";
+        messages.forEach(m => {
+            const div = document.createElement("div");
+            div.className = `msg ${m.sender}`;
+            div.innerHTML = `${m.text}<div class="timestamp">${m.time}</div>`;
+            messagesDiv.appendChild(div);
+        });
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    renderMessages();
+
+    function sendMessage() {
+        if (!input.value.trim()) return;
+
+        const text = escapeHTML(input.value.trim());
+        const time = new Date().toLocaleTimeString();
+
+       
+        messages.push({ sender: "me", text, time });
+
+        input.value = "";
+        renderMessages();
+        save();
+
+   
+        setTimeout(() => {
+            const botText = "Bot: Tôi đã nhận tin nhắn!";
+            messages.push({
+                sender: "bot",
+                text: botText,
+                time: new Date().toLocaleTimeString()
+            });
+            renderMessages();
+            save();
+        }, 2000);
+    }
+
+    function save() {
+        localStorage.setItem("chat_history", JSON.stringify(messages));
+    }
+</script>
+
+</body>
+</html>
