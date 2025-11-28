@@ -8,6 +8,42 @@
     text-align: center;
     margin: 40px auto;
 }
+#theory-box {
+  margin-top: 40px;
+  padding: 20px;
+  color: #121212;
+}
+
+#theory-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.theory-card {
+  background: rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  backdrop-filter: blur(6px);
+}
+
+.theory-card h3 {
+  margin-bottom: 10px;
+}
+
+.theory-card ul {
+  margin-left: 18px;
+}
+
+.code-block {
+  display: block;
+  background: #1e1e1e;
+  padding: 12px;
+  border-radius: 10px;
+  color: #00eaff;
+  overflow-x: auto;
+}
 
 .quiz-home-img {
     width: 100%;
@@ -126,6 +162,52 @@
     </iframe>
 </section>
 
+<section id="theory-box">
+  <h2>📘 Tổng hợp lý thuyết</h2>
+
+  <!-- Câu 1 -->
+  <div class="theory-card">
+    <h3>Câu 1 (1đ) — Phân biệt display: none, visibility: hidden và opacity: 0</h3>
+    <ul>
+      <li><b>display: none</b>: Phần tử biến mất hoàn toàn, không chiếm không gian và không thể tương tác.</li>
+      <li><b>visibility: hidden</b>: Không hiển thị nhưng vẫn chiếm chỗ, không thể tương tác.</li>
+      <li><b>opacity: 0</b>: Hoàn toàn trong suốt, vẫn chiếm chỗ và <u>vẫn tương tác</u> được.</li>
+    </ul>
+  </div>
+
+  <!-- Câu 2 -->
+  <div class="theory-card">
+    <h3>Câu 2 (1đ) — Quy trình trỏ Domain về Hosting</h3>
+
+    <p><b>1) Trỏ bằng Nameserver (NS):</b>  
+      Thay toàn bộ Nameserver sang Hosting. Hosting sẽ quản lý DNS.  
+      Nhược điểm: cập nhật chậm (30 phút → vài giờ).
+    </p>
+
+    <p><b>2) Trỏ bằng A Record:</b>  
+      Lấy IP Hosting → tạo bản ghi A trỏ domain về IP đó.  
+      Cập nhật nhanh (vài phút).</p>
+
+    <p><b>→ Cách nhanh nhất: Trỏ bằng A Record.</b></p>
+  </div>
+
+  <!-- Câu 3 -->
+  <div class="theory-card">
+    <h3>Câu 3 (1đ) — Viết lại hàm dùng async/await</h3>
+
+    <pre><code class="code-block">
+async function getData() {
+  try {
+    const res = await fetch('https://api.example.com/data');
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.error(err);
+  }
+}
+    </code></pre>
+  </div>
+</section>
 
 <section id="contact">
     <h2>Liên hệ</h2>
